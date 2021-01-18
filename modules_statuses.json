@@ -1,0 +1,9 @@
+{
+    "Dashboard": true,
+    "Setups": true,
+    "EventManagement": true,
+    "Reseller": true,
+    "Customer": true,
+    "Package": true,
+    "Order": true
+}
