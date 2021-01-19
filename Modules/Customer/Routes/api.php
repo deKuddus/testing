@@ -26,15 +26,18 @@ Route::middleware('auth:api')->get('/customer', function (Request $request) {
 // });
 
 
-Route::group(['prefix'=>'accounts','module' => 'Customer', 'middleware' => ['auth:api','api.permission']], function() { 
+Route::group(['prefix'=>'accounts','module' => 'Customer', 'middleware' => ['auth:api','api.permission']], function() {
 
 		Route::get('paid-users','API\AccountsController@paid_users');
 		Route::get('unpaid-users','API\AccountsController@unpaid_users');
 });
 
 
-Route::group(['prefix'=>'manage-pin','middleware' => ['auth:api','api.permission']], function() { 
+Route::group(['prefix'=>'manage-pin'], function() {
+    Route::group(['middleware' => ['auth:api','api.permission']],function(){
+        Route::apiResource('customers', 'API\CustomerController');
+        Route::get('online-users', 'API\CustomerController@onlineUsers');
+    });
 
-		Route::apiResource('customers', 'API\CustomerController');
-		Route::get('online-users', 'API\CustomerController@onlineUsers');
+		Route::post('customer-authentication-check', 'API\LoginController@cusAuthCheck');
 });
