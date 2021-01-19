@@ -1,76 +1,85 @@
 <?php
-function systemInformation(){
+function systemInformation()
+{
     return \Modules\Setups\Entities\SystemInformation::find(1);
 }
 
-function age($date){
-	$interval = date_diff(date_create(), date_create($date));
+function age($date)
+{
+    $interval = date_diff(date_create(), date_create($date));
     $years = $interval->format("%Y");
     $months = $interval->format("%M");
     $days = $interval->format("%d");
-    
+
     return array(
-    	'years' => $years,
-    	'months' => $months,
-    	'days' => $days,
+        'years' => $years,
+        'months' => $months,
+        'days' => $days,
     );
 }
 
-function ageInText($date){
-	$age=age($date);
-	return $age['years'].' Years '.$age['months'].' Months '.$age['days'].' days';
+function ageInText($date)
+{
+    $age = age($date);
+    return $age['years'] . ' Years ' . $age['months'] . ' Months ' . $age['days'] . ' days';
 }
 
-function timeToSeconds($time) {
+function timeToSeconds($time)
+{
     return strtotime($time) - strtotime('00:00:00');
 }
 
-function is_save($object,$message){
-	if($object){
-		success($message);
-		return redirect()->back();
-	}
+function is_save($object, $message)
+{
+    if ($object) {
+        success($message);
+        return redirect()->back();
+    }
 
-	whoops();
-	return redirect()->back();
+    whoops();
+    return redirect()->back();
 }
 
-function success($message='Your operation has been done successfully'){
-	session()->flash('success',$message);
+function success($message = 'Your operation has been done successfully')
+{
+    session()->flash('success', $message);
 }
 
-function whoops($message='Whoops! Something went Wrong!'){
-	session()->flash('danger',$message);
+function whoops($message = 'Whoops! Something went Wrong!')
+{
+    session()->flash('danger', $message);
 }
 
-function timeToHours($time){
-    $seconds=0;
-    $h=0;
-    $m=0;
-    $s=0;
+function timeToHours($time)
+{
+    $seconds = 0;
+    $h = 0;
+    $m = 0;
+    $s = 0;
     $explode = explode(':', $time);
-    if(isset($explode[0]) && $explode[0]>0){
-        $h=$explode[0];
+    if (isset($explode[0]) && $explode[0] > 0) {
+        $h = $explode[0];
     }
-    if(isset($explode[1]) && $explode[1]>0){
-        $m=$explode[1];
+    if (isset($explode[1]) && $explode[1] > 0) {
+        $m = $explode[1];
     }
-    if(isset($explode[2]) && $explode[2]>0){
-        $s=$explode[2];
+    if (isset($explode[2]) && $explode[2] > 0) {
+        $s = $explode[2];
     }
-    
+
     if (isset($explode[0]) && isset($explode[1]) && isset($explode[2])) {
-        $seconds+=$h * 3600 + $m * 60 + $s;
+        $seconds += $h * 3600 + $m * 60 + $s;
     }
-    if($seconds<=0){
-        $hours=0;
-    }else{
-        $hours=$seconds/3600;
+    if ($seconds <= 0) {
+        $hours = 0;
+    } else {
+        $hours = $seconds / 3600;
     }
     return number_format((float)$hours, 2, '.', '');
 }
 
-function inWord($number) {
+function inWord($number)
+{
     $hyphen      = '-';
     $conjunction = ' and ';
     $separator   = ', ';
@@ -186,37 +195,51 @@ function hoursToTime($time)
     return gmdate('H:i:s', floor($time * 3600));
 }
 
-function decimal($value){
+function decimal($value)
+{
     return number_format((float)$value, 2, '.', '');
 }
 
-function roundedDecimal($value){
+function roundedDecimal($value)
+{
     return round(number_format((float)$value, 2, '.', ''));
 }
 
-function whoCreateThis($object){
+function whoCreateThis($object)
+{
     $object->created_by = auth()->user()->id;
     $object->updated_by = auth()->user()->id;
 
     return $object;
 }
 
-function whoUpdateThis($object){
+function whoUpdateThis($object)
+{
     $object->updated_by = auth()->user()->id;
 
     return $object;
 }
 
-function uniquecode($length,$prefix,$max_field,$table,$extra = 0){
-    $prefix_length=strlen($prefix);
-    
-    $max_id=DB::select("SELECT MAX(".$max_field.") AS ".$max_field." FROM ".$table." WHERE SUBSTR(".$max_field.",1,".$prefix_length.")='".$prefix."'");
-    $only_id=substr($max_id[0]->$max_field,$prefix_length)+$extra;
-    $new=(int)($only_id);
+function uniquecode($length, $prefix, $max_field, $table, $extra = 0)
+{
+    $prefix_length = strlen($prefix);
+
+    $max_id = DB::select("SELECT MAX(" . $max_field . ") AS " . $max_field . " FROM " . $table . " WHERE SUBSTR(" . $max_field . ",1," . $prefix_length . ")='" . $prefix . "'");
+    $only_id = substr($max_id[0]->$max_field, $prefix_length) + $extra;
+    $new = (int)($only_id);
     $new++;
-    $number_of_zero=$length-$prefix_length-strlen($new);
-    $zero=str_repeat("0", $number_of_zero);
-    $made_id=$prefix.$zero.$new;
+    $number_of_zero = $length - $prefix_length - strlen($new);
+    $zero = str_repeat("0", $number_of_zero);
+    $made_id = $prefix . $zero . $new;
     return $made_id;
 }
 
+if (!function_exists('asset_path')) {
+    function asset_path($path, $local = true)
+    {
+        if ($local == true) {
+            return asset($path);
+        }
+        return 'public/' . $path;
+    }
+}

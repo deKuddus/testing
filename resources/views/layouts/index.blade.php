@@ -5,29 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>{{isset($pageTitle)?$pageTitle:''}} || {{systemInformation()->name}}</title>
-    <link rel="stylesheet" href="{{url('public/lte')}}/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="{{url('public/lte')}}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <link rel="stylesheet" href="{{url('public/lte')}}/dist/css/adminlte.min.css">
-    
+    <link rel="stylesheet" href="{{asset_path('lte/plugins/fontawesome-free/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset_path('lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+    <link rel="stylesheet" href="{{asset_path('lte/dist/css/adminlte.min.css')}}">
+
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
 
-    {{-- <link rel="stylesheet" href="{{url('public/lte')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.css"> --}}
+    {{-- <link rel="stylesheet" href="{{asset_path('lte/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}"> --}}
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.3/b-flash-1.6.3/b-html5-1.6.3/b-print-1.6.3/fc-3.3.1/fh-3.1.7/r-2.2.5/sc-2.0.2/datatables.min.css"/>
 
 
-    <link rel="stylesheet" href="{{url('public/lte')}}/jquery-confirm/jquery-confirm.min.css">
-    
-    <link rel="stylesheet" href="{{url('public/lte')}}/plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="{{url('public/lte')}}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="{{asset_path('lte/jquery-confirm/jquery-confirm.min.css')}}">
 
-    <link rel="stylesheet" href="{{url('public/lte')}}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    
-    <link rel="stylesheet" href="{{url('public/lte')}}/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="{{asset_path('lte/plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset_path('lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset_path('lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset_path('lte/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css')}}"/>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-    <link rel="stylesheet" href="{{url('public/lte')}}/wnoty/wnoty.css">
+    <link rel="stylesheet" href="{{asset_path('lte/wnoty/wnoty.css')}}">
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="icon" href="{{ url('public/system-images/icons/'.systemInformation()->icon) }}" type="image/png">
@@ -35,11 +35,11 @@
     @include('layouts.css')
     @include('layouts.js')
 
-    
+
 </head>
 <body class="sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
-  
+
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand" style="background: #05376d !important">
     <ul class="navbar-nav">
@@ -73,7 +73,7 @@
             </form>
           </a>
         </div>
-      </li>   
+      </li>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -83,7 +83,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    
+
     <!-- Main content -->
     <section class="content" style="padding-top: 25px">
       <div class="container-fluid">
@@ -106,9 +106,9 @@
     <strong>Copyright &copy; 2020 <a href="#">VPN</a></strong>
     &nbsp;
     All rights reserved.
-    
+
      <strong style="float:right">Developed By <a href="https://thelarasoft.com">LaraSoft Limited</a> &nbsp; Dev Team</strong>
-   
+
   </footer> --}}
 </div>
 <!-- ./wrapper -->

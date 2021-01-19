@@ -1,15 +1,15 @@
-<script src="{{url('public/lte')}}/plugins/jquery/jquery.min.js"></script>
-<script src="{{url('public/lte')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="{{url('public/lte')}}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<script src="{{url('public/lte')}}/dist/js/adminlte.js"></script>
-<script src="{{url('public/lte')}}/dist/js/demo.js"></script>
-<script src="{{url('public/lte')}}/plugins/chart.js/Chart.min.js"></script>
+<script src="{{asset_path('lte/plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{asset_path('lte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset_path('lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+<script src="{{asset_path('lte/dist/js/adminlte.js')}}"></script>
+<script src="{{asset_path('lte/dist/js/demo.js')}}"></script>
+<script src="{{asset_path('lte/plugins/chart.js/Chart.min.js')}}"></script>
 
-<script src="{{url('public/lte')}}/jquery-confirm/jquery-confirm.min.js"></script>
+<script src="{{asset_path('lte/jquery-confirm/jquery-confirm.min.js')}}"></script>
 
-<script src="{{url('public/lte')}}/plugins/select2/js/select2.full.min.js"></script>
+<script src="{{asset_path('lte/plugins/select2/js/select2.full.min.js')}}"></script>
 
-<script src="{{url('public/lte')}}/wnoty/wnoty.js"></script>
+<script src="{{asset_path('lte/wnoty/wnoty.js')}}"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
@@ -17,9 +17,9 @@
 
 <script src="//cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
 
-<script src="{{url('public/lte')}}/bootstrap-datetimepicker/moment.min.js" ></script>
+<script src="{{asset_path('lte/bootstrap-datetimepicker/moment.min.js')}}"></script>
 
-<script src="{{url('public/lte')}}/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="{{asset_path('lte/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
@@ -60,7 +60,7 @@
 
     $(document).ready(function() {
       $('input').attr('autocomplete','off');
-      
+
       setTimeout(function(){
         $('.half-a-second').fadeIn();
     },500);
@@ -71,7 +71,7 @@
         [ 5,10, 25, 50, 100, -1 ],
         [ '5 rows', '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
         ],
-        
+
         iDisplayLength: 100,
         sScrollX: "100%",
         sScrollXInner: "100%",
@@ -126,7 +126,7 @@
     });
 
       $('.datetimepicker').datetimepicker();
-      
+
       $('.datepicker').datetimepicker({
         format: 'YYYY-MM-DD',
     });
@@ -191,7 +191,7 @@
             backgroundDismiss: true,
         });
     }
-    
+
     function Delete(id,link) {
         $.confirm({
             title: 'Confirm!',
@@ -226,7 +226,7 @@
                     text: 'No',
                     btnClass: 'btn-default',
                     action: function(){
-                        
+
                     }
                 }
             }
@@ -245,8 +245,8 @@
       var sound = "{{auth()->user()->sound}}";
       if(sound == 1){
         var obj = document.createElement("audio");
-        obj.src = "{{url('public/lte/tones')}}/"+(which)+".mp3"; 
-        obj.play(); 
+        obj.src = "{{url('public/lte/tones')}}/"+(which)+".mp3";
+        obj.play();
     }
 }
 
