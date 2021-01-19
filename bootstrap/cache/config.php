@@ -181,7 +181,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\xampp\\htdocs\\vpn\\storage\\framework/cache/data',
+        'path' => 'D:\\my-project\\vpn\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -374,10 +374,10 @@
     'orientation' => 'portrait',
     'defines' => 
     array (
-      'font_dir' => 'C:\\xampp\\htdocs\\vpn\\storage\\fonts/',
-      'font_cache' => 'C:\\xampp\\htdocs\\vpn\\storage\\fonts/',
-      'temp_dir' => 'C:\\Users\\ANALYT~1\\AppData\\Local\\Temp',
-      'chroot' => 'C:\\xampp\\htdocs\\vpn',
+      'font_dir' => 'D:\\my-project\\vpn\\storage\\fonts/',
+      'font_cache' => 'D:\\my-project\\vpn\\storage\\fonts/',
+      'temp_dir' => 'C:\\Users\\IMTIAZ~1\\AppData\\Local\\Temp',
+      'chroot' => 'D:\\my-project\\vpn',
       'enable_font_subsetting' => false,
       'pdf_backend' => 'CPDF',
       'default_media_type' => 'screen',
@@ -489,7 +489,7 @@
     ),
     'temporary_files' => 
     array (
-      'local_path' => 'C:\\xampp\\htdocs\\vpn\\storage\\framework/laravel-excel',
+      'local_path' => 'D:\\my-project\\vpn\\storage\\framework/laravel-excel',
       'remote_disk' => NULL,
       'remote_prefix' => NULL,
       'force_resync_remote' => NULL,
@@ -504,12 +504,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\vpn\\storage\\app',
+        'root' => 'D:\\my-project\\vpn\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\vpn\\storage\\app/public',
+        'root' => 'D:\\my-project\\vpn\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
@@ -565,13 +565,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\xampp\\htdocs\\vpn\\storage\\logs/laravel.log',
+        'path' => 'D:\\my-project\\vpn\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\xampp\\htdocs\\vpn\\storage\\logs/laravel.log',
+        'path' => 'D:\\my-project\\vpn\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -621,7 +621,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'C:\\xampp\\htdocs\\vpn\\storage\\logs/laravel.log',
+        'path' => 'D:\\my-project\\vpn\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -644,7 +644,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\xampp\\htdocs\\vpn\\resources\\views/vendor/mail',
+        0 => 'D:\\my-project\\vpn\\resources\\views/vendor/mail',
       ),
     ),
     'log_channel' => NULL,
@@ -655,7 +655,7 @@
     'stubs' => 
     array (
       'enabled' => false,
-      'path' => 'C:\\xampp\\htdocs\\vpn/vendor/nwidart/laravel-modules/src/Commands/stubs',
+      'path' => 'D:\\my-project\\vpn/vendor/nwidart/laravel-modules/src/Commands/stubs',
       'files' => 
       array (
         'routes/web' => 'Routes/web.php',
@@ -719,9 +719,9 @@
     ),
     'paths' => 
     array (
-      'modules' => 'C:\\xampp\\htdocs\\vpn\\Modules',
-      'assets' => 'C:\\xampp\\htdocs\\vpn\\public\\modules',
-      'migration' => 'C:\\xampp\\htdocs\\vpn\\database/migrations',
+      'modules' => 'D:\\my-project\\vpn\\Modules',
+      'assets' => 'D:\\my-project\\vpn\\public\\modules',
+      'migration' => 'D:\\my-project\\vpn\\database/migrations',
       'generator' => 
       array (
         'config' => 
@@ -856,7 +856,7 @@
       'enabled' => false,
       'paths' => 
       array (
-        0 => 'C:\\xampp\\htdocs\\vpn\\vendor/*/*',
+        0 => 'D:\\my-project\\vpn\\vendor/*/*',
       ),
     ),
     'composer' => 
@@ -884,7 +884,7 @@
       'file' => 
       array (
         'class' => 'Nwidart\\Modules\\Activators\\FileActivator',
-        'statuses-file' => 'C:\\xampp\\htdocs\\vpn\\modules_statuses.json',
+        'statuses-file' => 'D:\\my-project\\vpn\\modules_statuses.json',
         'cache-key' => 'activator.installed',
         'cache-lifetime' => 604800,
       ),
@@ -965,7 +965,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\xampp\\htdocs\\vpn\\storage\\framework/sessions',
+    'files' => 'D:\\my-project\\vpn\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -985,9 +985,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\vpn\\resources\\views',
+      0 => 'D:\\my-project\\vpn\\resources\\views',
     ),
-    'compiled' => 'C:\\xampp\\htdocs\\vpn\\storage\\framework\\views',
+    'compiled' => 'D:\\my-project\\vpn\\storage\\framework\\views',
   ),
   'flare' => 
   array (

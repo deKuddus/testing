@@ -15,19 +15,19 @@ use DB;
 Use Str;
 
 class CustomerController extends Controller
-{   
+{
 
     public function __construct()
     {
         $this->middleware('auth:api');
-        
+
     }
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
-    {      
+    {
 
         $pageTitle= "Users List";
 
@@ -39,7 +39,7 @@ class CustomerController extends Controller
 
             $data=Customer::where('reseller_id',auth()->user()->reseller_id)->get();
         }
-        
+
 
         if($data){
             return response()->json([
@@ -51,8 +51,8 @@ class CustomerController extends Controller
         return response()->json([
             'success' => false,
             'message' => 'Something went wrong!'
-        ]); 
-        
+        ]);
+
     }
 
     /**
@@ -60,8 +60,8 @@ class CustomerController extends Controller
      * @return Response
      */
     public function create()
-    {   
-        
+    {
+
     }
 
     /**
@@ -71,7 +71,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request,Customer $user)
     {
-        
+
         $validator = \Validator::make($request->all(), [
             'name' => 'required|max:191',
             'mobile' => 'required|max:15',
@@ -80,7 +80,7 @@ class CustomerController extends Controller
             'to_date' => 'required',
             'billing_system' => 'required|max:64',
             'status' => 'required',
-            
+
         ]);
 
             if ($validator->passes()) {
@@ -96,7 +96,7 @@ class CustomerController extends Controller
                 if(!$model )
                 {
 
-                    // Store user data 
+                    // Store user data
                     $customers = Customer::where('reseller_id',auth()->user()->reseller_id)->count();
 
                     if (auth()->user()->role_id =='2') {
@@ -111,7 +111,7 @@ class CustomerController extends Controller
                             ]);
                         }
                     }else{
-                        
+
                         return response()->json([
                             'success' => false,
                             'message' => 'Your Registration has been expired!'
@@ -120,7 +120,7 @@ class CustomerController extends Controller
                 }
 
                 if( $user->fill($input))
-                {   
+                {
                     $user->reseller_id = auth()->user()->reseller_id=='0'?null:auth()->user()->reseller_id;
                     $user = whoCreateThis($user);
                     $user->save();
@@ -153,14 +153,14 @@ class CustomerController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Something went wrong!'
-                ]); 
+                ]);
 
             }else{
 
                 return response()->json([
                     'success' => false,
                     'message' => 'This User already added!'
-                ]); 
+                ]);
             }
 
         }else{
@@ -193,7 +193,7 @@ class CustomerController extends Controller
         return response()->json([
             'success' => false,
             'message' => 'Something went wrong!'
-        ]); 
+        ]);
     }
 
     /**
@@ -202,8 +202,8 @@ class CustomerController extends Controller
      * @return Response
      */
     public function edit($id)
-    {   
-        
+    {
+
     }
 
     /**
@@ -232,7 +232,7 @@ class CustomerController extends Controller
 
             $input['username']= Str::slug($request->username)."-".$id;
          }
-            
+
         if (auth()->user()->role_id =='2') {
 
              if(!currentRegistration(auth()->user()->reseller_id)){
@@ -299,14 +299,14 @@ class CustomerController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Something went wrong!'
-                ]); 
+                ]);
 
             }else{
 
                 return response()->json([
                     'success' => false,
                     'message' => 'This User already added!'
-                ]); 
+                ]);
             }
 
         }else{
@@ -331,20 +331,20 @@ class CustomerController extends Controller
             if(currentRegistration(auth()->user()->reseller_id)){
 
                 $model=Customer::where('id',$id)->where('reseller_id',auth()->user()->reseller_id)->first();
-                
+
                 if($model->delete()){
 
                     User::where('customer_id',$id)->where('reseller_id',auth()->user()->reseller_id)->delete();
 
                     return response()->json([
                         'success' => true,
-                    ]); 
+                    ]);
                 }
 
                 return response()->json([
                     'success' => false,
                     'message' => 'Member cannot be deleted'
-                ]); 
+                ]);
 
             }else{
 
@@ -364,21 +364,21 @@ class CustomerController extends Controller
 
                  return response()->json([
                         'success' => true,
-                    ]); 
+                    ]);
             }else{
                 return response()->json([
                     'success' => false,
                     'message' => 'Member cannot be deleted'
-                ]); 
+                ]);
             }
         }
-        
+
     }
 
-  
+
 
     public function onlineUsers()
-    {   
+    {
         $pageTitle="Online Users";
         if (auth()->user()->role_id=='1' || auth()->user()->role_id=='7') {
 
@@ -399,7 +399,15 @@ class CustomerController extends Controller
         return response()->json([
             'success' => false,
             'message' => 'Something went wrong!'
-        ]); 
+        ]);
     }
 
+    public function cusAuthCheck(Request $request)
+    {
+        $customer = Customer::where('username' , $request->username)->where('unique_code',$request->unique_code)->get();
+        return response()->json([
+            'customer' => $customer,
+        ]);
+
+    }
 }

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 
 class Customer extends Model
-{	
+{
 	protected $table = 'customers';
 
     protected $fillable = [
@@ -20,6 +20,7 @@ class Customer extends Model
         'mobile',
         'username',
         'password',
+        'unique_code',
         'address',
         'from_date',
         'to_date',

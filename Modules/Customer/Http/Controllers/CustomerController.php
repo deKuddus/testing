@@ -5,6 +5,7 @@ namespace Modules\Customer\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Str;
 use Modules\Customer\Http\Requests;
 use \Modules\Reseller\Entities\ResellerModel;
 use \Modules\Customer\Entities\Customer;
@@ -12,22 +13,21 @@ use \Modules\Package\Entities\PackageModel;
 use \App\User;
 use Session;
 use DB;
-Use Str;
 
 class CustomerController extends Controller
-{   
+{
 
     public function __construct()
     {
         $this->middleware('auth');
-        
+
     }
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
-    {      
+    {
 
         $pageTitle= "Users List";
 
@@ -39,10 +39,10 @@ class CustomerController extends Controller
 
             $data=Customer::where('reseller_id',auth()->user()->reseller_id)->get();
         }
-        
+
 
         return view('customer::users.index',compact('data','pageTitle'));
-        
+
     }
 
     /**
@@ -50,7 +50,7 @@ class CustomerController extends Controller
      * @return Response
      */
     public function create()
-    {   
+    {
         $package_list=[''=>'Select Package']+PackageModel::where('status','1')->pluck('title','id')->all();
         $billing_system=['1' => "1 Month",'2' => "2 Month",'3' => "3 Month",'4' => "4 Month",'5' => "5 Month",'6' => "6 Month",'7' => "7 Month",'8' => "8 Month",'9' => "9 Month",'10' => "10 Month",'11' => "11 Month",'12' => "12 Month",'13' => "Unlimited",
         ];
@@ -64,12 +64,13 @@ class CustomerController extends Controller
      */
     public function store(Requests\CustomerRequest $request,Customer $user)
     {
+        $unique_code = rand(10000, 99999).'-'.time();
         // Get all input data
         $input = $request->all();
 
         $count_all=$user->count();
         $countplus=$count_all+1;
-        
+
         $input['username']= Str::slug($request->username)."-u-".$countplus;
         // Check already presents or not
         $model=Customer::where('mobile',$input['mobile'])->exists();
@@ -78,7 +79,7 @@ class CustomerController extends Controller
             /* Transaction Start Here */
             DB::beginTransaction();
             try {
-                    // Store user data 
+                    // Store user data
                     $customers = Customer::where('reseller_id',auth()->user()->reseller_id)->count();
 
                     if (auth()->user()->role_id =='2') {
@@ -97,10 +98,12 @@ class CustomerController extends Controller
                     }
 
                 if( $user->fill($input))
-                {   
+                {
                     $user->reseller_id = auth()->user()->reseller_id=='0'?null:auth()->user()->reseller_id;
+                    $user->unique_code =$unique_code;
                     $user = whoCreateThis($user);
                     $user->save();
+
 
 
                     User::create([
@@ -108,6 +111,7 @@ class CustomerController extends Controller
                         'email' => $input['email'],
                         'username' => $input['username'],
                         'password' => bcrypt($request->password),
+                        'unique_code' => $unique_code,
                         'role_id' => 3,
                         'customer_id' => $user->id,
                         'reseller_id' => $user->reseller_id,
@@ -124,6 +128,7 @@ class CustomerController extends Controller
             } catch (\Exception $e) {
                 //If there are any exceptions, rollback the transaction`
                 DB::rollback();
+                return $e->getMessage();
                 Session::flash('danger', $e->getMessage());
             }
         }else{
@@ -131,7 +136,7 @@ class CustomerController extends Controller
             Session::flash('danger', 'This User already added!');
             return back();
         }
-       
+
         return redirect()->back();
     }
 
@@ -151,7 +156,7 @@ class CustomerController extends Controller
      * @return Response
      */
     public function edit($id)
-    {   
+    {
         $data = [
             'data' => Customer::find($id),
             'package_list'=>PackageModel::where('status','1')->pluck('title','id')->all(),
@@ -177,7 +182,7 @@ class CustomerController extends Controller
 
             $input['username']= Str::slug($request->username)."-".$id;
          }
-            
+
         if (auth()->user()->role_id =='2') {
 
              if(!currentRegistration(auth()->user()->reseller_id)){
@@ -253,20 +258,20 @@ class CustomerController extends Controller
             if(currentRegistration(auth()->user()->reseller_id)){
 
                 $model=Customer::where('id',$id)->where('reseller_id',auth()->user()->reseller_id)->first();
-                
+
                 if($model->delete()){
 
                     User::where('customer_id',$id)->where('reseller_id',auth()->user()->reseller_id)->delete();
 
                     return response()->json([
                         'success' => true,
-                    ]); 
+                    ]);
                 }
 
                 return response()->json([
                     'success' => false,
                     'message' => 'Member cannot be deleted'
-                ]); 
+                ]);
 
             }else{
 
@@ -286,15 +291,15 @@ class CustomerController extends Controller
 
                  return response()->json([
                         'success' => true,
-                    ]); 
+                    ]);
             }else{
                 return response()->json([
                     'success' => false,
                     'message' => 'Member cannot be deleted'
-                ]); 
+                ]);
             }
         }
-        
+
     }
 
     public function getRow($row,$username){
@@ -314,7 +319,7 @@ class CustomerController extends Controller
             //start loop
              for ($i = 0; $i < $request->num_row; $i++) {
                 //convert to slug
-              
+
                 //check null or not
                 if ($request->name[$i] != "" && $request->mobile[$i] != "" && $request->username[$i] != "") {
 
@@ -375,13 +380,13 @@ class CustomerController extends Controller
                                 ]);
                         }
 
-                    }  
+                    }
 
                 }else{
 
                     Session::flash('danger', 'Please enter email, phone number, username');
                     return back();
-                } 
+                }
              }
             //end loop
         }
@@ -392,7 +397,7 @@ class CustomerController extends Controller
     }
 
      public function onlineUsers()
-    {   
+    {
         $pageTitle="Online Users";
         if (auth()->user()->role_id=='1' || auth()->user()->role_id=='7') {
 
