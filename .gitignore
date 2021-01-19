@@ -1,57 +1,11 @@
 /node_modules
-
-
+/public/hot
+/public/storage
+/storage/*.key
 /vendor
-.env
 .env.backup
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-
-#later added ignores
-composer.lock
-.idea/
-.vscode/
-.phpintel
-.phpintel/
-nbproject/
-#.gitignore
-storage/
-public/angular/
-
-## Packages ##
-##############
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-
-## Logs / Database ##
-#####################
-*.log
-
-*.sqlite
-
-## OS generated ##
-.DS_Store
-.DS_Store?
-._*
-.Spotlight_V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-## Build System ##
-##################
-node_modules/
-bower_components/
-.sass-cache
-*.css.map
-build/
-#dist/
